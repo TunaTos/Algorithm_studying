@@ -20,7 +20,8 @@ void input() {
     dp[0][0] = 0;
 }
 
-void solve() { 
+void solve() {
+    for (int i = 1; i <= N; i++) {
         for (int j = 0; j <= K; j++) {
             dp[i][j] = dp[i-1][j];
             if (j >= caffein[i]) {
