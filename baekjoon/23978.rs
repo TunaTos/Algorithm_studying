@@ -59,7 +59,7 @@ fn main() {
         .map(|x| x.parse().unwrap())
         .collect();
 
-    my_vec.insert(0, 0); 
+    my_vec.insert(0, 0);
 
     solve(n, k_goal, my_vec);
 }
