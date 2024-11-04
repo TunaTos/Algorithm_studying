@@ -6,7 +6,7 @@ fn get_sum(num: u128) -> u128 {
 
 fn get_vector_sum(k: u128, my_vec: &Vec<u128>, k_goal: u128) -> u128 {
     let mut sum: u128 = 0;
-
+     
     for i in 1..my_vec.len() {
         let distance;
         if i == my_vec.len() - 1 {
@@ -26,7 +26,6 @@ fn get_vector_sum(k: u128, my_vec: &Vec<u128>, k_goal: u128) -> u128 {
     }
     sum
 }
-
 fn solve(n: u128, k_goal: u128, my_vec: Vec<u128>) {
     let (mut left, mut right) = (1, 10_u128.pow(18));
     let mut answer = right;
