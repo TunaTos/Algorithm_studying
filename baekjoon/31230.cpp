@@ -7,13 +7,10 @@ using pll = pair<ull,ull>; // weight, node
 
 const auto INF = numeric_limits<ull>::max();
 int E, V, From, To;
-
 vector<int> res;
 vector<pll> adj[MAX_VERT];
 
-
-
-void input()
+void input() noexcept
 {
 	int from, to;
 	ull w;
@@ -27,7 +24,7 @@ void input()
 	}
 }
 
-vector<ull> dijkstra(const int& node)
+vector<ull> dijkstra(const int& node) noexcept
 {
 	priority_queue<pll,vector<pll>, greater<pll>> pq;
 
@@ -50,19 +47,12 @@ vector<ull> dijkstra(const int& node)
 				pq.push(make_pair(res[to], to));
 			}
 		}
-	}
-
-
-	// for (int i = 1; i <= V; i++)
-	// {
-	// 	cout << res[i] << " ";
-	// }
-	
+	}	
 	return res;
 }
 
 
-void solve()
+void solve() noexcept
 {
 	input();
 	vector<ull> from_distance = dijkstra(From);
@@ -84,9 +74,9 @@ void solve()
 
 
 
-int main(void)
+int main(void) noexcept
 {
-	// ios::sync_with_stdio(0);
+	ios::sync_with_stdio(0);
 	cin.tie(0); cout.tie(0);
 
 	solve();
