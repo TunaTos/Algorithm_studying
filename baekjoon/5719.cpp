@@ -155,7 +155,7 @@ void solve() noexcept
 
 int main(void) noexcept
 {
-	// ios::sync_with_stdio(0);
+	ios::sync_with_stdio(0);
 	cin.tie(0); cout.tie(0);
 	
 	solve();
