@@ -41,9 +41,6 @@ void solve()
 	Eratos E(M,N);
 	E.setEratos();
 	E.getResult();
-
-
-
 }
 
 int main(void)

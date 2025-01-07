@@ -14,6 +14,7 @@ private:
 	int N, M;
 	vector<int> visited;
 	vector<char> chars;
+	const set<char> vowels {'a','e','i','o','u'};
 public:
 	Solver(const int& n_input, const int& m_input) : 
 		N(n_input), M(m_input), visited(M,false), chars(M) 
@@ -35,7 +36,7 @@ public:
 				if (visited[i] == 1)
 				{
 					vec.push_back(chars[i]);
-					if (chars[i] == 'a' || chars[i] == 'e' || chars[i] == 'i' || chars[i] =='o' || chars[i] =='u')
+					if (vowels.count(chars[i]))
 						vowel_num++;
 					else
 						consonent_num++;
