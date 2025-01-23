@@ -18,7 +18,7 @@ void showContainer(const Container& c)
     }cout << endl;
 }
 
-void input()
+void input() noexcept
 {
     cin >> V >> E;
     int start, to;
@@ -30,7 +30,7 @@ void input()
     }
 }
 
-void dfs(const int& node, vector<bool>& visited, int& cnt)
+void dfs(const int& node, vector<bool>& visited, int& cnt) noexcept
 {
     visited[node] = true;
     
@@ -40,7 +40,9 @@ void dfs(const int& node, vector<bool>& visited, int& cnt)
             dfs(next, visited, ++cnt);
     }
 }
-void setNodeNum()
+
+
+void setNodeNum() noexcept
 {
     for (int i = 1; i <= V; i++)
     {
@@ -50,7 +52,7 @@ void setNodeNum()
     }    
 }
 
-void printResult()
+void printResult() noexcept
 {
     for (int i = 1; i <= V; i++)
     {
@@ -60,7 +62,7 @@ void printResult()
 }
 
 
-void solve()
+void solve() noexcept
 {
     input();
     setNodeNum();
@@ -68,7 +70,7 @@ void solve()
     printResult();
 }
 
-int main(void)
+int main(void) noexcept
 {
     ios::sync_with_stdio(0);
     cin.tie(0); cout.tie(0);
