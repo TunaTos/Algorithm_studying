@@ -15,7 +15,7 @@ void showMap(unordered_map<int,int> map)
 	for (const auto&ele: map)
 		cout << ele.first << "  " << ele.second << endl;
 	cout << endl;
-}	
+}
 
 void input() 
 {
@@ -52,8 +52,6 @@ void solve()
 
 	int node; ull cost;
 	unordered_map<int,int> map;
-
-
 
 	for (int i = 0; i < T; i++)
 	{
