@@ -35,7 +35,7 @@ bool isPrunning(int dpt)
     return true;
 }
 
-void dfs(int idx, int dpt) 
+void dfs(int idx, int dpt) // idx는 필요없을 듯
 {
     if (dpt == N + 1)
     {
