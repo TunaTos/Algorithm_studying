@@ -59,7 +59,7 @@ void solve()
             vector<int> selected;
             dfs(Len, j, 0,0,selected);
         }        
-        cout << "# " << i+1 << " " << res << endl;
+        cout << "#" << i+1 << " " << res << endl;
     }
     
 }
