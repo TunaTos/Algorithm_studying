@@ -9,10 +9,7 @@ using pii = pair<int,int>;
 int start, target, res;
 vector<bool> visited;
 
-
-
 priority_queue<pii, vector<pii>, greater<pii>> pq;
-
 
 bool inTheArray(int node) 
 {
