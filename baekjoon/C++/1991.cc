@@ -65,36 +65,9 @@ void inorder(char c)
     char left_child = adj[char_to_int(c)][0];
     char right_child = adj[char_to_int(c)][1];
 
-    if (left_child == '.' && right_child == '.')
-    {
-        cout << c;
-        return ;
-    }
-
-    else if (left_child != '.' && right_child != '.')
-    {
-        inorder(left_child);
-        cout << c;
-        inorder(right_child);
-        
-        return ;
-    }
-
-    else if (left_child != '.' && right_child == '.')
-    {
-        inorder(left_child);
-        cout << c;
-
-        return ;
-    }
-
-    else if (left_child == '.' && right_child != '.')
-    {
-        cout << c;
-        inorder(right_child);
-        
-        return ;
-    }
+    inorder(left_child);
+    cout << c;
+    inorder(right_child);
 }
 
 
