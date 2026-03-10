@@ -19,23 +19,12 @@
 #include <vector>
 #include <algorithm>
 #include <limits.h>
-#include <unordered_set>
 #define endl '\n'
 using namespace std;
 
 int row, col, r, res;
 vector<vector<int>> matrix; 
 vector<bool> arrows;
-
-
-void show_matrix() {
-    for (int i = 1; i <= row; ++i) {
-        for (int j = 1; j <= col; ++j) {
-            cout << matrix[i][j] << " ";
-        }cout << endl;
-    }
-}
-
 
 void input() {
     cin >> row >> col >> r;
@@ -48,40 +37,44 @@ void input() {
             cin >> matrix[i][j];
 }
 
-
-void moving() {
+void moving(vector<vector<int>>& mat) {
     for (int i = row-1; i >= 1; --i) {
         for (int j = 1; j <= col; ++j) {
-            matrix[i+1][j] = matrix[i][j];
+            mat[i+1][j] = mat[i][j];
         }
     }
     for (int j = 1; j <= col; ++j) 
-        matrix[1][j] = 0;
+        mat[1][j] = 0;
 }
-
-void shooting_arrows() {
+int shooting_arrows(vector<vector<int>>& mat) {
     
     vector<pair<int,int>> enemies;
 
-
     for (int a = 1; a <= col; ++a) {
         int dis = INT_MAX;
-        pair<int,int> p = {-1,-1};
-
+        pair<int,int> p = {-1, -1};
 
         if (arrows[a] == true) {
-            cout << "I am a : " << a << " ";
-            for (int i = row; i >= 1; --i) {
-                for (int j = col; j >= 1; --j) {
-                    if (matrix[i][j] == 1) {
-                        int d = abs((row + 1 - i) + abs(a - j));
+
+
+
+            for (int i = 1; i <= row; ++i) {
+                for (int j = 1; j <= col; ++j) {
+                    if (mat[i][j] == 1) {
+                        int d = abs(row + 1 - i) + abs(a - j);
                         
-                        if (dis > d) {
-                            dis = d;
-                            p.first = i; p.second = j;
-                        } else if (dis == d && p.second < j) {
-                            dis = d;
-                            p.first = i; p.second = j;
+
+
+                        if (d <= r) {
+                            if (d < dis) 
+                            {
+                                dis = d;
+                                p.first = i; p.second = j;
+                            } 
+                            
+                            else if (d == dis && j < p.second) {
+                                p.first = i; p.second = j;
+                            }
                         }
                     }
                 }
@@ -91,54 +84,51 @@ void shooting_arrows() {
         }
     }
     
-    for (pair<int,int> p: enemies) {
-        cout << p.first << " " << p.second << endl;
-    }
-    cout << endl;
-    // 같은 것이 있을 수도 있음
-
-    
-    if (enemies.empty()) return ;
-    else {
-        res++;
-        pair<int,int> p = enemies[0];
-
-        for (int i = 1; i < enemies.size(); ++i) {
-            pair<int,int> en = enemies[i];
-
-            if (p.first != en.first || p.second != en.second) {
-                p = en;
-                ++res;
-            }
+    vector<pair<int,int>> unique_enemies;
+    for (pair<int,int> p : enemies) {
+        if (find(unique_enemies.begin(), unique_enemies.end(), p) == unique_enemies.end()) {
+            unique_enemies.push_back(p);
         }
     }
+
+    for (pair<int,int> p : unique_enemies) {
+        mat[p.first][p.second] = 0;
+    }
+
+    return unique_enemies.size();
 }
+
 
 
 void solve() {
     input();
-    for (int z = 1; z <= row; ++z) {
 
-        for (int i = 1; i <= col-2; ++i) {
-            arrows[i] = true;
-            for (int j = i + 1; j <= col-1; ++j) {
-                arrows[j] = true;
-                for (int k = j+1; k <= col; ++k) {
-                    arrows[k] = true;
-                    
-                    // arrows selected
-                    shooting_arrows();
+    for (int i = 1; i <= col-2; ++i) {
+        arrows[i] = true;
+        for (int j = i + 1; j <= col-1; ++j) {
+            arrows[j] = true;
+            for (int k = j+1; k <= col; ++k) {
+                arrows[k] = true;
+                
 
-                    arrows[k] = false;
+
+                vector<vector<int>> tmp = matrix;
+                int cnt = 0;
+
+                for (int turn = 0; turn < row; ++turn) {
+                    cnt += shooting_arrows(tmp);
+                    moving(tmp);
                 }
-                arrows[j] = false;
-            }
-            arrows[i] = false;
-        }
-        moving();
-    }   
-}
 
+                res = max(res, cnt);
+
+                arrows[k] = false;
+            }
+            arrows[j] = false;
+        }
+        arrows[i] = false;
+    }
+}
 
 int main(void) {
     ios::sync_with_stdio(0);
